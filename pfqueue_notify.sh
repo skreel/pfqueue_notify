@@ -6,6 +6,7 @@
 # 	*/1 * * * * root nice -n 19 bash /usr/local/sbin/mailqueue_notification.sh >/dev/null 2>&1
 #
 # healthchecks.io to monitor it's execution, pushover.net and email to notify
+# *** update pfqueue_notify.env to set values for script or modify ones below ***
 
 EMAIL_TO="<email@example.com>"
 EMAIL_FROM="<servername>"
@@ -13,7 +14,7 @@ SERVER_NAME="<servername.example.com>"
 
 # anything greater than the threshold (not equal to)
 #QUEUE_ALERT_THRESHOLD=200 #100
-DEFERRED_QUEUE_ALERT_THRESHOLD=0 #>0 anything deferred get notified if single deferral
+DEFERRED_QUEUE_ALERT_THRESHOLD=10 #>0 anything deferred get notified if single deferral
 ACTIVE_QUEUE_ALERT_THRESHOLD=10
 
 ## pushover.net auth
@@ -32,7 +33,8 @@ EMAIL_ALERT_INTERVAL=600              # Minimum time between alerts in seconds (
 EMAIL_LAST_ACTIVE_ALERT_FILE="/tmp/postfix_email_active_queue_alert_time" # File to store the timestamp of the last alert
 EMAIL_LAST_DEFERRED_ALERT_FILE="/tmp/postfix_email_deferred_queue_alert_time" # File to store the timestamp of the last alert
 
-source .env
+#override any of the settings above from pfqueue_notify.env file
+source pfqueue_notify.env
 
 CURRENT_TIME=$(date +%s)
 #HUMAN_TIME=$(date "+%a %b %d %I:%M:%S %p %:::z %Y")

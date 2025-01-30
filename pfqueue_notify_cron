@@ -1,0 +1,7 @@
+#!/bin/sh
+# 
+# copy pfqueue_notify.sh and pfqueue_notify.env (if you have one) to /usr/local/sbin
+# copy this file to /etc/cron.d/
+#
+
+*/1 * * * * root nice -n 19 bash /usr/local/sbin/pfqueue_notify.sh >/dev/null 2>&1
